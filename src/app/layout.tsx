@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { IChildren } from "../types";
+import { Toaster } from "@/components/ui/sonner";
+import Providers from "@/providers/Providers";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -20,12 +22,15 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<IChildren>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <div className="min-h-[calc(100vh-64px)]">{children}</div>
-      </body>
-    </html>
+    <Providers>
+      <html lang="en">
+        <body
+          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        >
+          <div className="min-h-[calc(100vh-64px)]">{children}</div>
+          <Toaster richColors position="top-center" />
+        </body>
+      </html>
+    </Providers>
   );
 }

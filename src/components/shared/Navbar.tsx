@@ -1,8 +1,13 @@
+"use client";
 import Logo from "@/assets/svg/Logo";
 import { Button } from "../ui/button";
 import { Heart, ShoppingBag } from "lucide-react";
+import Link from "next/link";
+import { AvatarDropDown } from "./AvatararDropDown";
+import { useUser } from "@/context/UserContext";
 
 export default function Navbar() {
+  const { user } = useUser();
   return (
     <header className="border-b w-full">
       <div className="container flex justify-between items-center mx-auto h-16 px-3">
@@ -24,6 +29,19 @@ export default function Navbar() {
           <Button variant="outline" className="rounded-full p-0 size-10">
             <ShoppingBag />
           </Button>
+
+          <Link href={"/create-shop"}>
+            <Button className="rounded-full">Create Shop</Button>
+          </Link>
+          {user ? (
+            <AvatarDropDown />
+          ) : (
+            <Link href={"/login"}>
+              <Button variant="outline" className="rounded-full">
+                Login
+              </Button>
+            </Link>
+          )}
         </nav>
       </div>
     </header>
