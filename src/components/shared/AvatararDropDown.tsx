@@ -12,13 +12,20 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { LogOut } from "lucide-react";
 import { logOut } from "@/services/auth/logOut";
 import { useUser } from "@/context/UserContext";
+import { usePathname, useRouter } from "next/navigation";
+import { privateRoutes } from "@/constants/privateRoutes";
 
 export function AvatarDropDown() {
   const { setIsLoading } = useUser();
+  const pathname = usePathname();
+  const router = useRouter();
 
   const handleLogOut = async () => {
     await logOut();
     setIsLoading(true);
+    if (privateRoutes.some((route) => pathname.match(route))) {
+      router.push("/");
+    }
   };
 
   return (

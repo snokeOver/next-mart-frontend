@@ -25,7 +25,7 @@ export default function RootLayout({ children }: Readonly<IChildren>) {
     <Providers>
       <html lang="en">
         <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+          className={`${geistSans.variable} ${geistMono.className} antialiased`}
         >
           <div className="min-h-[calc(100vh-64px)]">{children}</div>
           <Toaster richColors position="top-center" />

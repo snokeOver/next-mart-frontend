@@ -14,8 +14,8 @@ const UserProvider = ({ children }: IChildren) => {
   };
 
   useEffect(() => {
-    handleUser();
-  }, []);
+    if (isLoading) handleUser();
+  }, [isLoading]);
 
   const providerValues = {
     user,

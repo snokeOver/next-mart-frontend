@@ -20,9 +20,14 @@ import { toast } from "sonner";
 import { loginSchema } from "./loginValidation";
 import { loginUser } from "@/services/auth/login";
 import { recapchaVerification } from "@/services/auth/recapchaVerification";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useUser } from "@/context/UserContext";
 
 const LoginForm = () => {
+  const { setIsLoading } = useUser();
   const [recapchaStatus, setRecapchaStatus] = useState(true);
+  const route = useRouter();
+  const searchParams = useSearchParams();
   const form = useForm({
     resolver: zodResolver(loginSchema),
     mode: "onChange",
@@ -47,8 +52,11 @@ const LoginForm = () => {
     try {
       const res = await loginUser(data);
 
-      if (res.success) toast.success(res.message);
-      else toast.error(res.message);
+      if (res.success) {
+        setIsLoading(true);
+        toast.success(res.message);
+        route.push(searchParams.get("redirect") || "/profile");
+      } else toast.error(res.message);
     } catch (error) {
       console.log(error);
       toast.error(`User registration Failed`);
