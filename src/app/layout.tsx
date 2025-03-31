@@ -22,15 +22,15 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<IChildren>) {
   return (
-    <Providers>
-      <html lang="en">
-        <body
-          className={`${geistSans.variable} ${geistMono.className} antialiased`}
-        >
+    <html lang="en">
+      <body
+        className={`${geistSans.variable} ${geistMono.className} antialiased`}
+      >
+        <Providers>
           <div className="min-h-[calc(100vh-64px)]">{children}</div>
           <Toaster richColors position="top-center" />
-        </body>
-      </html>
-    </Providers>
+        </Providers>
+      </body>
+    </html>
   );
 }

@@ -7,6 +7,7 @@ type Specification = {
 
 export interface IProduct {
   _id: string;
+  orderQuantity?: number;
   name: string;
   description: string;
   price: number;

@@ -4,8 +4,6 @@ import { cookies } from "next/headers";
 import { FieldValues } from "react-hook-form";
 
 export const loginUser = async (userData: FieldValues) => {
-  console.log(userData);
-  console.log(process.env.NEXT_PUBLIC_BASE_API);
   try {
     const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/auth/login`, {
       method: "POST",
@@ -16,8 +14,10 @@ export const loginUser = async (userData: FieldValues) => {
     });
 
     const result = await res.json();
-    if (result.success)
+    if (result.success) {
       (await cookies()).set("accessToken", result.data.accessToken);
+      (await cookies()).set("refreshToken", result.data.refreshToken);
+    }
 
     return result;
   } catch (error: any) {

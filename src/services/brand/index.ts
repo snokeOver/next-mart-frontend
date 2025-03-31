@@ -1,4 +1,5 @@
 "use server";
+import { getValidToken } from "@/lib/verifyToken";
 import { revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
 
@@ -24,7 +25,7 @@ export const createBrand = async (brandData: FormData): Promise<any> => {
       method: "POST",
       body: brandData,
       headers: {
-        Authorization: (await cookies()).get("accessToken")!.value,
+        Authorization: await getValidToken(),
       },
     });
     revalidateTag("Brands");
@@ -42,7 +43,7 @@ export const deleteBrand = async (brandId: string): Promise<any> => {
       {
         method: "DELETE",
         headers: {
-          Authorization: (await cookies()).get("accessToken")!.value,
+          Authorization: await getValidToken(),
         },
       }
     );

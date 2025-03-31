@@ -14,9 +14,10 @@ import { logOut } from "@/services/auth/logOut";
 import { useUser } from "@/context/UserContext";
 import { usePathname, useRouter } from "next/navigation";
 import { privateRoutes } from "@/constants/privateRoutes";
+import Link from "next/link";
 
 export function AvatarDropDown() {
-  const { setIsLoading } = useUser();
+  const { setIsLoading, user } = useUser();
   const pathname = usePathname();
   const router = useRouter();
 
@@ -40,7 +41,9 @@ export function AvatarDropDown() {
         <DropdownMenuLabel>My Account</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem>Profile</DropdownMenuItem>
-        <DropdownMenuItem>Dashboard</DropdownMenuItem>
+        <DropdownMenuItem>
+          <Link href={`/${user?.role}/dashboard`}>Dashboard</Link>
+        </DropdownMenuItem>
         <DropdownMenuItem>Shop</DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem

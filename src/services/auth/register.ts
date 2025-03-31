@@ -16,8 +16,10 @@ export const registerUser = async (userData: FieldValues) => {
     });
 
     const result = await res.json();
-    if (result.success)
+    if (result.success) {
       (await cookies()).set("accessToken", result.data.accessToken);
+      (await cookies()).set("refreshToken", result.data.refreshToken);
+    }
 
     return result;
   } catch (error: any) {

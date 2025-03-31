@@ -8,7 +8,7 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { IBrand } from "@/types";
 
-import { CommonTalbe } from "@/components/ui/core/CommonTable";
+import { CommonTalbe } from "@/components/ui/core/table/CommonTable";
 import CreateBrandModal from "./CreateBrandModal";
 import { deleteBrand } from "@/services/brand";
 import DeleteConfirmationModal from "@/components/ui/core/DeleteConfirmationModal";
@@ -29,7 +29,7 @@ const ManageBrands = ({ brands }: { brands: IBrand[] }) => {
     try {
       if (selectedId) {
         const res = await deleteBrand(selectedId);
-        console.log(res);
+
         if (res.success) {
           toast.success(res.message);
           setModalOpen(false);

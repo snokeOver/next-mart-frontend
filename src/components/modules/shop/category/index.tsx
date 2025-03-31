@@ -10,13 +10,13 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { deleteCategory } from "@/services/category/createCategory";
 import DeleteConfirmationModal from "@/components/ui/core/DeleteConfirmationModal";
-import { CommonTalbe } from "@/components/ui/core/CommonTable";
+import { CommonTalbe } from "@/components/ui/core/table/CommonTable";
 
 type TCategoriesProps = {
   categories: ICategory[];
 };
 
-const ManageCategories = ({ categories }: TCategoriesProps) => {
+const ManageCategories = ({ categories = [] }: TCategoriesProps) => {
   const [isModalOpen, setModalOpen] = useState(false);
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [selectedItem, setSelectedItem] = useState<string | null>(null);
